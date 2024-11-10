@@ -30,6 +30,14 @@ const Navbar = async () => {
               >
                 <button type="submit">Logout</button>
               </form>
+              {/* <button
+                onClick={async () => {
+                  "use server";
+                  await signOut({ redirectTo: "/" });
+                }}
+              >
+                Logout
+              </button> */}
               <Link href={`/user/${session?.user?.id}`}>
                 <Image
                   src={session?.user?.image as string}

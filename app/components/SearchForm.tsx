@@ -14,6 +14,8 @@ const SearchForm = ({ query }: { query?: string }) => {
 
       <div className="flex gap-2">
         {query && <SearchFormReset />}
+        {/* when this button s is clicked, it will redirect to "/" by the Form action */}
+        {/* this will refresh the page and check again if the query is null or not */}
         <button type="submit" className="search-btn text-white">
           S
         </button>
