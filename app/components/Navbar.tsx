@@ -31,7 +31,13 @@ const Navbar = async () => {
                 <button type="submit">Logout</button>
               </form>
               <Link href={`/user/${session?.user?.id}`}>
-                <span>{session?.user?.name}</span>
+                <Image
+                  src={session?.user?.image as string}
+                  alt="profile"
+                  width={28}
+                  height={28}
+                  className="rounded-full"
+                />
               </Link>
             </>
           ) : (
