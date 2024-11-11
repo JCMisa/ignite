@@ -1,6 +1,7 @@
 import React from "react";
 import Form from "next/form";
 import SearchFormReset from "./SearchFormReset";
+import { Search } from "lucide-react";
 
 const SearchForm = ({ query }: { query?: string }) => {
   return (
@@ -17,7 +18,7 @@ const SearchForm = ({ query }: { query?: string }) => {
         {/* when this button s is clicked, it will redirect to "/" by the Form action */}
         {/* this will refresh the page and check again if the query is null or not */}
         <button type="submit" className="search-btn text-white">
-          S
+          <Search className="size-5" />
         </button>
       </div>
     </Form>
