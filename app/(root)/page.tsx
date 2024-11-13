@@ -1,5 +1,7 @@
 import SearchForm from "@/components/custom/SearchForm";
-import StartupCard from "@/components/custom/StartupCard";
+import StartupCard, { StartupTypeCard } from "@/components/custom/StartupCard";
+import { client } from "@/sanity/lib/client";
+import { STARTUPS_QUERY } from "@/sanity/lib/queries";
 
 export default async function Home({
   searchParams,
@@ -7,41 +9,42 @@ export default async function Home({
   searchParams: Promise<{ query?: string }>;
 }) {
   const query = (await searchParams).query;
-  const posts = [
-    {
-      _createdAt: new Date(),
-      views: 55,
-      author: { _id: 1, name: "John Carlo" },
-      _id: 1,
-      description: "This is a description",
-      image:
-        "https://cdn.prod.website-files.com/66e3ffddf1c6e55cc8c157f6/670e5eb8e61989bc964945e5_655b5e2e1972c2cc19a3c190_startup-business-model.png",
-      category: "Robots",
-      title: "We Robots",
-    },
-    {
-      _createdAt: new Date(),
-      views: 55,
-      author: { _id: 2, name: "John Moniel" },
-      _id: 2,
-      description: "This is a description",
-      image:
-        "https://cdn.prod.website-files.com/66e3ffddf1c6e55cc8c157f6/670e5eb8e61989bc964945e5_655b5e2e1972c2cc19a3c190_startup-business-model.png",
-      category: "Robots",
-      title: "We Robots",
-    },
-    {
-      _createdAt: new Date(),
-      views: 55,
-      author: { _id: 3, name: "John Vincent" },
-      _id: 3,
-      description: "This is a description",
-      image:
-        "https://cdn.prod.website-files.com/66e3ffddf1c6e55cc8c157f6/670e5eb8e61989bc964945e5_655b5e2e1972c2cc19a3c190_startup-business-model.png",
-      category: "Robots",
-      title: "We Robots",
-    },
-  ];
+
+  const posts = await client.fetch(STARTUPS_QUERY);
+  //   {
+  //     _createdAt: new Date(),
+  //     views: 55,
+  //     author: { _id: 1, name: "John Carlo" },
+  //     _id: 1,
+  //     description: "This is a description",
+  //     image:
+  //       "https://cdn.prod.website-files.com/66e3ffddf1c6e55cc8c157f6/670e5eb8e61989bc964945e5_655b5e2e1972c2cc19a3c190_startup-business-model.png",
+  //     category: "Robots",
+  //     title: "We Robots",
+  //   },
+  //   {
+  //     _createdAt: new Date(),
+  //     views: 55,
+  //     author: { _id: 2, name: "John Moniel" },
+  //     _id: 2,
+  //     description: "This is a description",
+  //     image:
+  //       "https://cdn.prod.website-files.com/66e3ffddf1c6e55cc8c157f6/670e5eb8e61989bc964945e5_655b5e2e1972c2cc19a3c190_startup-business-model.png",
+  //     category: "Robots",
+  //     title: "We Robots",
+  //   },
+  //   {
+  //     _createdAt: new Date(),
+  //     views: 55,
+  //     author: { _id: 3, name: "John Vincent" },
+  //     _id: 3,
+  //     description: "This is a description",
+  //     image:
+  //       "https://cdn.prod.website-files.com/66e3ffddf1c6e55cc8c157f6/670e5eb8e61989bc964945e5_655b5e2e1972c2cc19a3c190_startup-business-model.png",
+  //     category: "Robots",
+  //     title: "We Robots",
+  //   },
+  // ];
 
   return (
     <>
@@ -65,7 +68,7 @@ export default async function Home({
 
         <ul className="mt-7 card_grid">
           {posts?.length > 0 ? (
-            posts?.map((post: StartupCardType) => (
+            posts?.map((post: StartupTypeCard) => (
               <StartupCard key={post?._id} post={post} />
             ))
           ) : (

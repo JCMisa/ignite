@@ -4,8 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { Button } from "../ui/button";
+import { Author, Startup } from "@/sanity/types";
 
-const StartupCard = ({ post }: { post: StartupCardType }) => {
+export type StartupTypeCard = Omit<Startup, "author"> & { author?: Author };
+
+const StartupCard = ({ post }: { post: StartupTypeCard }) => {
   return (
     <li className="startup-card group">
       <div className="flex-between">
@@ -27,7 +30,7 @@ const StartupCard = ({ post }: { post: StartupCardType }) => {
         </div>
         <Link href={`/user/${post?.author?._id}`}>
           <Image
-            src={`https://dummyimage.com/48x48`}
+            src={post?.author?.image as string}
             alt="banner"
             width={48}
             height={48}
@@ -38,7 +41,7 @@ const StartupCard = ({ post }: { post: StartupCardType }) => {
       <Link href={`/startup/${post?._id}`}>
         <p className="startup-card_desc">{post?.description}</p>
         <Image
-          src={post?.image}
+          src={post?.image as string}
           alt="banner"
           width={1000}
           height={1000}
@@ -47,7 +50,7 @@ const StartupCard = ({ post }: { post: StartupCardType }) => {
       </Link>
 
       <div className="flex-between gap-3 mt-5">
-        <Link href={`/?query=${post?.category.toLowerCase()}`}>
+        <Link href={`/?query=${post?.category?.toLowerCase()}`}>
           <p className="text-16-medium">{post?.category}</p>
         </Link>
 
