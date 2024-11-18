@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import "easymde/dist/easymde.min.css";
+import { Toaster } from "@/components/ui/toaster";
+// import "easymde/dist/easymde.min.css";
 
 const workSans = localFont({
   src: [
@@ -69,7 +70,10 @@ export default function RootLayout({
       <head>
         <link rel="icon" type="image/svg+xml" href="/ignite-logo.svg" />
       </head>
-      <body className={`${workSans.variable}`}>{children}</body>
+      <body className={`${workSans.variable}`}>
+        {children}
+        <Toaster />
+      </body>
     </html>
   );
 }
