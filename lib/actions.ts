@@ -8,6 +8,13 @@ import { writeClient } from "@/sanity/lib/wite-client";
 
 export const createPitch = async (
   state: any,
+  // form: {
+  //   title: string;
+  //   description: string;
+  //   category: string;
+  //   link: string;
+  //   pitch: string;
+  // },
   form: FormData,
   pitch: string
 ) => {
@@ -21,6 +28,8 @@ export const createPitch = async (
   const { title, description, category, link } = Object.fromEntries(
     Array.from(form).filter(([key]) => key !== pitch)
   );
+
+  // const { title, description, category, link } = form;
 
   const slug = slugify(title as string, { lower: true, strict: true });
 

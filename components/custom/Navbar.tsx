@@ -1,4 +1,5 @@
 import { auth, signIn, signOut } from "@/auth";
+import { BadgePlus, LogOut } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -6,6 +7,7 @@ import React from "react";
 // mark this component as async to make this as server side which is more faster
 const Navbar = async () => {
   const session = await auth(); // access the user by using the session from auth
+  console.log("session info: ", session);
   return (
     <header className="px-5 py-3 bg-white shadow-sm font-work-sans">
       <nav className="flex justify-between items-center">
@@ -19,7 +21,8 @@ const Navbar = async () => {
           {session && session?.user ? (
             <>
               <Link href={"/startup/create"}>
-                <span>Create</span>
+                <span className="max-sm:hidden">Create</span>
+                <BadgePlus className="size-6 sm:hidden" />
               </Link>
               {/* new nextjs feature for form to access server side by using a form instead of button */}
               <form
@@ -28,7 +31,10 @@ const Navbar = async () => {
                   await signOut({ redirectTo: "/" });
                 }}
               >
-                <button type="submit">Logout</button>
+                <button type="submit">
+                  <span className="max-sm:hidden">Logout</span>
+                  <LogOut className="size-6 sm:hidden text-red-500" />
+                </button>
               </form>
               {/* <button
                 onClick={async () => {
@@ -38,7 +44,7 @@ const Navbar = async () => {
               >
                 Logout
               </button> */}
-              <Link href={`/user/${session?.user?.id}`}>
+              <Link href={`/user/${session?.id}`}>
                 <Image
                   src={session?.user?.image as string}
                   alt="profile"
