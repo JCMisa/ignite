@@ -107,6 +107,7 @@ const StartupDetails = async ({
           </div>
         )}
 
+        {/* pass suspense for partial pre rendering */}
         <Suspense fallback={<Skeleton className="view_skeleton" />}>
           <View id={id} />
         </Suspense>
